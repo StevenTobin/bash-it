@@ -351,7 +351,7 @@ function ruby_version_prompt {
 }
 
 function k8s_context_prompt {
-  echo -e "$(kubectl config current-context 2> /dev/null)"
+  echo -e "$(kubectl config current-context | awk -F "/" '{print $2}' | awk -F ":" '{print $1}' | awk -F "-" '{print $2 , $3}' 2> /dev/null)"
 }
 
 function virtualenv_prompt {
